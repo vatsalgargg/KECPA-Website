@@ -734,6 +734,41 @@ ul { list-style: none; }
 
 .footer p { color: var(--text-muted); margin-top: 1rem; line-height: 1.8; }
 
+/* Visitor Counter */
+.visitor-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    padding: 0.45rem 1.2rem;
+    background: rgba(245, 197, 24, 0.08);
+    border: 1px solid rgba(245, 197, 24, 0.25);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    backdrop-filter: blur(4px);
+    transition: var(--t);
+}
+
+.visitor-counter:hover {
+    background: rgba(245, 197, 24, 0.15);
+    border-color: var(--gold);
+    color: var(--text-primary);
+}
+
+.visitor-counter i {
+    color: var(--gold);
+    font-size: 0.95rem;
+}
+
+.visitor-number {
+    color: var(--gold);
+    font-weight: 700;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+}
+
 /* "Made with love" line */
 .footer-love {
     display: flex;
