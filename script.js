@@ -71,30 +71,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submitBtn');
     const formStatus = document.getElementById('formStatus');
 
-    // 6. Visitor Counter via CountAPI
+    // 6. Visitor Counter via counterapi.dev (active CountAPI fork)
     const visitorCountEl = document.getElementById('visitorCount');
     if (visitorCountEl) {
-        fetch('https://api.countapi.xyz/hit/kecpa-website/visits')
-            .then(res => res.json())
+        const LS_KEY = 'kecpa_visitor_count';
+
+        function animateCount(target) {
+            const stored = parseInt(localStorage.getItem(LS_KEY) || '0', 10);
+            localStorage.setItem(LS_KEY, target);
+            const start = Math.max(stored, Math.max(0, target - 80));
+            const duration = 1500;
+            const startTime = performance.now();
+            const tick = (now) => {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                visitorCountEl.textContent = Math.floor(start + (target - start) * eased).toLocaleString();
+                if (progress < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        }
+
+        // Show cached count immediately while the fetch runs
+        const cached = localStorage.getItem(LS_KEY);
+        if (cached) visitorCountEl.textContent = parseInt(cached, 10).toLocaleString();
+
+        fetch('https://api.counterapi.dev/v1/kecpa-website/visits/hit')
+            .then(res => { if (!res.ok) throw new Error('API error'); return res.json(); })
             .then(data => {
-                if (data && data.value !== undefined) {
-                    // Animate count up
-                    const target = data.value;
-                    const duration = 1500;
-                    const start = Math.max(0, target - 80);
-                    const startTime = performance.now();
-                    const tick = (now) => {
-                        const elapsed = now - startTime;
-                        const progress = Math.min(elapsed / duration, 1);
-                        const eased = 1 - Math.pow(1 - progress, 3);
-                        visitorCountEl.textContent = Math.floor(start + (target - start) * eased).toLocaleString();
-                        if (progress < 1) requestAnimationFrame(tick);
-                    };
-                    requestAnimationFrame(tick);
+                if (data && data.count !== undefined) {
+                    animateCount(data.count);
                 }
             })
             .catch(() => {
-                visitorCountEl.textContent = '—';
+                // Fallback: increment localStorage counter so it still ticks up
+                const fallback = parseInt(localStorage.getItem(LS_KEY) || '0', 10) + 1;
+                localStorage.setItem(LS_KEY, fallback);
+                animateCount(fallback);
             });
     }
 
