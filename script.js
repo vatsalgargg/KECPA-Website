@@ -2,6 +2,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // ── Security Logger ──────────────────────────────────────────────────────
+  // Structured client-side logging for anomalies, API errors, and spam attempts.
+  // In production, replace console.warn with a POST to your logging endpoint.
+  const secLog = {
+    _fmt: (level, event, detail) => ({
+      level, event, detail,
+      ts: new Date().toISOString(),
+      url: location.href,
+      ua: navigator.userAgent.slice(0, 120)
+    }),
+    warn:  (event, detail) => console.warn('[KECPA-SEC]',  JSON.stringify(secLog._fmt('WARN',  event, detail))),
+    error: (event, detail) => console.error('[KECPA-SEC]', JSON.stringify(secLog._fmt('ERROR', event, detail))),
+    info:  (event, detail) => console.info('[KECPA-SEC]',  JSON.stringify(secLog._fmt('INFO',  event, detail))),
+  };
+
+  // ── Form Rate Limiter ─────────────────────────────────────────────────────
+  // Prevents repeated submissions within 60 seconds.
+  const RATE_LIMIT_MS = 60_000;
+  const RL_KEY = 'kecpa_form_last_submit';
+  function isRateLimited() {
+    const last = parseInt(localStorage.getItem(RL_KEY) || '0', 10);
+    return Date.now() - last < RATE_LIMIT_MS;
+  }
+  function markSubmission() {
+    localStorage.setItem(RL_KEY, Date.now());
+  }
+
   // 1. NAVBAR SCROLL
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -109,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // 7. CONTACT FORM (Formspree AJAX)
+  // 7. CONTACT FORM (Formspree AJAX + rate limit + honeypot + security logging)
   const contactForm = document.getElementById('contactForm');
   const submitBtn = document.getElementById('submitBtn');
   const formStatus = document.getElementById('formStatus');
@@ -117,6 +144,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // Honeypot check — bots fill hidden _gotcha field
+      const honeypot = contactForm.querySelector('input[name="_gotcha"]');
+      if (honeypot && honeypot.value) {
+        secLog.warn('HONEYPOT_TRIGGERED', { field: '_gotcha' });
+        return; // silently reject bot
+      }
+
+      // Rate limit check
+      if (isRateLimited()) {
+        const remaining = Math.ceil((RATE_LIMIT_MS - (Date.now() - parseInt(localStorage.getItem(RL_KEY) || '0', 10))) / 1000);
+        secLog.warn('RATE_LIMIT_HIT', { cooldown_s: remaining });
+        formStatus.className = 'form-status error';
+        formStatus.textContent = `⚠️ Please wait ${remaining}s before sending another message.`;
+        return;
+      }
+
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
       formStatus.className = 'form-status';
@@ -128,17 +172,22 @@ document.addEventListener('DOMContentLoaded', () => {
           body: new FormData(contactForm),
           headers: { 'Accept': 'application/json' }
         });
+
         if (res.ok) {
+          markSubmission();
+          secLog.info('FORM_SUBMIT_SUCCESS', { status: res.status });
           formStatus.className = 'form-status success';
           formStatus.textContent = '✅ Thank you! We\'ll be in touch within 24 hours.';
           contactForm.reset();
         } else {
-          const data = await res.json();
-          const msg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Something went wrong.';
+          const data = await res.json().catch(() => ({}));
+          const msg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Submission failed.';
+          secLog.error('FORM_SUBMIT_FAILED', { status: res.status, msg });
           formStatus.className = 'form-status error';
           formStatus.textContent = '❌ ' + msg;
         }
-      } catch {
+      } catch (err) {
+        secLog.error('FORM_NETWORK_ERROR', { message: err.message });
         formStatus.className = 'form-status error';
         formStatus.textContent = '❌ Network error. Please email us directly.';
       } finally {
@@ -147,5 +196,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Log unhandled JS errors (unusual JS exceptions may indicate tampering)
+  window.addEventListener('error', (e) => {
+    secLog.error('UNHANDLED_JS_ERROR', { message: e.message, file: e.filename, line: e.lineno });
+  });
+
+  // Log failed resource loads (CSP violations, blocked scripts, missing assets)
+  window.addEventListener('error', (e) => {
+    if (e.target && e.target !== window) {
+      secLog.warn('RESOURCE_LOAD_FAILED', { tag: e.target.tagName, src: e.target.src || e.target.href });
+    }
+  }, true);
 
 });

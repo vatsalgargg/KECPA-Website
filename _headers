@@ -1,0 +1,19 @@
+/*
+  Netlify _headers file
+  Applied to every response served by Netlify hosting.
+  Enforces HTTPS, prevents clickjacking, XSS, MIME sniffing,
+  and restricts what external resources the browser can load.
+*/
+
+/*
+  Force HTTPS on all requests (HSTS)
+  max-age=1 year, include subdomains, eligible for HSTS preload list
+*/
+https://knowledgeexcellencecpa.com/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self' https://formspree.io https://api.counterapi.dev; frame-ancestors 'none'; base-uri 'self'; form-action https://formspree.io

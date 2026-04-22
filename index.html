@@ -302,6 +302,8 @@
                         <p>We respond within 24 hours, guaranteed.</p>
                     </div>
                     <form class="contact-form" id="contactForm" action="https://formspree.io/f/xykdrpbe" method="POST">
+                        <!-- Honeypot: hidden from real users, bots fill this — submission is rejected -->
+                        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Full Name</label>
