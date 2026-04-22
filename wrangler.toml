@@ -1,13 +1,7 @@
 name = "kecpa-website"
-main = "worker.js"
 compatibility_date = "2026-04-22"
 
-[site]
-bucket = "./"
-include = ["index.html", "index.css", "script.js", "logo.png", "sitemap.xml", "robots.txt"]
-
-# Cloudflare Workers — security headers applied at the edge
-# These headers enforce HTTPS, prevent clickjacking, XSS,
-# MIME sniffing, and restrict resource origins via CSP.
-[vars]
-ENVIRONMENT = "production"
+# Cloudflare Pages — static site deployment
+# Security headers are handled by the _headers file at the root.
+# No worker script needed; this is a pure static site.
+pages_build_output_dir = "./"
