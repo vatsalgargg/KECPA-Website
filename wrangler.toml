@@ -1,7 +1,6 @@
-name = "kecpa-website"
+name = 'kecpa'
 compatibility_date = "2026-04-22"
 
-# Cloudflare Pages — static site deployment
+# Cloudflare Pages — pure static site, no build step needed.
 # Security headers are handled by the _headers file at the root.
-# No worker script needed; this is a pure static site.
 pages_build_output_dir = "./"
