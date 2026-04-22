@@ -1,187 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knowledge Excellence CPAs | Global Accounting Solutions</title>
-    <meta name="description"
-        content="U.S.-Licensed CPA-Led Accounting & Advisory Outsourcing Solutions that bridge the gap between global expertise and local solutions.">
-    <!-- Google Fonts: Inter for Body, Outfit for Headings -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;700&display=swap"
-        rel="stylesheet">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a1628">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <title>Knowledge Excellence CPAs | U.S.-Licensed Accounting & Advisory</title>
+    <meta name="description" content="Knowledge Excellence CPAs — U.S.-Licensed CPA-led accounting, tax, audit, and advisory outsourcing solutions.">
+    <!-- Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://api.counterapi.dev">
+    <!-- Fonts: only weights actually used -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome: load after paint -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
-    <header class="navbar">
+
+    <!-- NAVBAR -->
+    <header class="navbar" id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">
-                <img src="logo.png" alt="Knowledge Excellence CPA's Logo" class="logo-img">
-                <span class="logo-name"><span class="logo-text">Knowledge Excellence</span><span class="logo-accent"> CPA's</span></span>
+            <a href="#home" class="logo">
+                <img src="logo.png" alt="Knowledge Excellence CPAs Logo" class="logo-img" fetchpriority="high" loading="eager" decoding="async" width="42" height="42">
+                <span class="logo-name">
+                    <span class="logo-text">Knowledge Excellence</span>
+                    <span class="logo-accent">CPA's</span>
+                </span>
             </a>
-            <button class="mobile-menu-toggle" aria-label="Toggle navigation" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
             <nav class="nav-links" id="navLinks">
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
-                <a href="#about">About us</a>
-                <a href="#contact" class="btn btn-primary">Contact Us</a>
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#process" class="nav-link">Process</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="btn btn-nav-cta">Schedule Consultation</a>
             </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation" id="menuToggle">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero section">
-            <div class="hero-content container fade-in-up">
-                <p class="hero-badge">U.S.-Licensed CPA-Led Accounting &amp; Advisory Outsourcing Solutions</p>
-                <h1 class="hero-title">Bridging <span class="highlight">Global Expertise</span>.<br> Empowering <span
-                        class="highlight">Financial Growth</span>.</h1>
-                <p class="hero-subtitle">We act as a seamless extension of your finance team — combining U.S.
-                    professionalism with cost-efficient operations to elevate your financial success.</p>
-                <div class="hero-actions">
-                    <a href="tel:+918123485942" class="btn btn-primary btn-lg">Book A Trial</a>
-                    <a href="#services" class="btn btn-secondary btn-lg">Learn More</a>
+        <!-- HERO -->
+        <section id="home" class="hero">
+            <div class="hero-bg-mesh"></div>
+            <div class="container hero-grid">
+                <div class="hero-left reveal-left">
+                    <div class="hero-badge">
+                        <i class="fas fa-shield-halved"></i>
+                        U.S.-Licensed CPA-Led Advisory
+                    </div>
+                    <h1 class="hero-title">
+                        Financial Clarity.<br>
+                        <span class="title-gold">Global Precision.</span>
+                    </h1>
+                    <p class="hero-subtitle">We act as a seamless extension of your finance team — combining U.S. professionalism with cost-efficient operations to elevate your financial success.</p>
+                    <div class="hero-actions">
+                        <a href="tel:+918123485942" class="btn btn-primary">
+                            <i class="fas fa-phone"></i> Book a Free Consult
+                        </a>
+                        <a href="#services" class="btn btn-outline">
+                            Explore Services <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="trust-badges">
+                        <span class="trust-badge"><i class="fas fa-certificate"></i> AICPA Member</span>
+                        <span class="trust-badge"><i class="fas fa-landmark"></i> IRS Authorized</span>
+                        <span class="trust-badge"><i class="fas fa-scale-balanced"></i> GAAP Compliant</span>
+                    </div>
+                </div>
+                <div class="hero-right reveal-right">
+                    <div class="hero-card-stack">
+                        <div class="hero-img-blob">
+                            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=60" alt="Professional CPA team at work" loading="lazy" decoding="async" width="340" height="420">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-scroll-indicator">
+                <span>Scroll to explore</span>
+                <div class="scroll-dot"></div>
+            </div>
+        </section>
+
+        <section class="stats-banner">
+            <div class="container stats-grid">
+                <div class="stat-item reveal-up">
+                    <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
+                    <div class="stat-label">U.S.-Licensed CPAs</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item reveal-up" style="transition-delay:0.1s">
+                    <div class="stat-icon"><i class="fas fa-globe"></i></div>
+                    <div class="stat-label">Global Delivery Model</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item reveal-up" style="transition-delay:0.2s">
+                    <div class="stat-icon"><i class="fas fa-shield-halved"></i></div>
+                    <div class="stat-label">GAAP & IRS Compliant</div>
                 </div>
             </div>
         </section>
 
-        <!-- About Us -->
-        <section id="about" class="about section bg-light">
-            <div class="container grid-2 fade-in">
-                <div class="about-text">
-                    <h2 class="section-title">Who We Are <br><span class="text-gradient">Knowledge Excellence
-                            CPAs</span></h2>
-                    <p>We are a highly skilled team of U.S.-licensed CPAs delivering best-in-class accounting solutions
-                        globally. We act as an extension of your finance team—combining U.S. professionalism with
-                        cost-efficient Indian operations to elevate the quality of your financial success.</p>
+        <!-- ABOUT -->
+        <section id="about" class="about section">
+            <div class="container about-grid">
+                <div class="about-left reveal-left">
+                    <div class="section-eyebrow">Who We Are</div>
+                    <h2 class="section-title">Knowledge Excellence CPAs — Your Trusted Partner</h2>
+                    <p class="section-body">We are a highly skilled team of U.S.-licensed CPAs delivering best-in-class accounting solutions globally. We act as a seamless extension of your finance team — combining U.S. professionalism with cost-efficient Indian operations.</p>
+                    <p class="section-body">Our commitment to ethical practice, technical rigor, and client-first service has made us a preferred outsourcing partner for CPA firms, businesses, and high-net-worth individuals across the United States.</p>
+                    <a href="#contact" class="btn btn-primary mt-3">Work With Us <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="about-highlights">
-                    <div class="highlight-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>Growth-Oriented</h3>
-                        <p>We leverage advanced tools and deep domain expertise for optimal financial performance.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services -->
-        <section id="services" class="services section">
-            <div class="container">
-                <div class="section-header text-center fade-in-up">
-                    <h2 class="section-title">Our Core Services</h2>
-                    <p class="section-subtitle">We empower your business with professional financial guidance and
-                        tailored operations.</p>
-                </div>
-                <div class="services-grid mt-4">
-                    <div class="service-card slide-in-bottom">
-                        <i class="fas fa-file-invoice-dollar service-icon"></i>
-                        <h3>Financial Accounting &amp; Reporting</h3>
-                        <p>Accurate financial reporting and bookkeeping under U.S. GAAP — ensuring transparency,
-                            compliance, and insight-driven decisions.</p>
-                        <a href="#contact" class="link-btn">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="service-card slide-in-bottom" style="transition-delay: 80ms;">
-                        <i class="fas fa-balance-scale service-icon"></i>
-                        <h3>Tax Preparation &amp; Planning</h3>
-                        <p>Comprehensive U.S. tax preparation, filing, and proactive planning aligned with
-                            international and federal tax laws.</p>
-                        <a href="#contact" class="link-btn">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="service-card slide-in-bottom" style="transition-delay: 160ms;">
-                        <i class="fas fa-search-dollar service-icon"></i>
-                        <h3>Audit Support &amp; Compliance</h3>
-                        <p>Rigorous audit preparation, financial analysis, and regulatory compliance to keep your
-                            business fully protected.</p>
-                        <a href="#contact" class="link-btn">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="service-card slide-in-bottom" style="transition-delay: 240ms;">
-                        <i class="fas fa-calculator service-icon"></i>
-                        <h3>Bookkeeping &amp; Payroll</h3>
-                        <p>Meticulous day-to-day bookkeeping and full-cycle payroll management so you can focus on
-                            growing your business.</p>
-                        <a href="#contact" class="link-btn">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="service-card slide-in-bottom" style="transition-delay: 320ms;">
-                        <i class="fas fa-user-tie service-icon"></i>
-                        <h3>Virtual CFO &amp; Advisory</h3>
-                        <p>Strategic financial leadership on demand — budgeting, forecasting, fundraising support,
-                            and long-term growth advisory.</p>
-                        <a href="#contact" class="link-btn">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Quote -->
-        <section class="quote-section section text-center text-white">
-            <div class="container fade-in">
-                <h2 class="quote-text">“Your Financial Success, Calculated.”</h2>
-                <a href="#contact" class="btn btn-primary btn-lg mt-2">Start Optimizing Today</a>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact section">
-            <div class="container grid-2">
-                <div class="contact-info fade-in-left">
-                    <h2 class="section-title">Get Started</h2>
-                    <p>Contact us for a tailored proposal and discover how we streamling your accounting and tax
-                        processes.</p>
-
-                    <div class="contact-details mt-4">
-                        <div class="contact-item">
-                            <i class="fas fa-phone-alt"></i>
+                <div class="about-right reveal-right">
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-user-tie"></i></div>
                             <div>
-                                <h4>Phone (India)</h4>
+                                <h4>U.S.-Licensed CPAs</h4>
+                                <p>Every engagement led by credentialed, experienced professionals.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-globe"></i></div>
+                            <div>
+                                <h4>Global Delivery Model</h4>
+                                <p>U.S. standards with India-based efficiency — the best of both worlds.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-lock"></i></div>
+                            <div>
+                                <h4>Confidentiality First</h4>
+                                <p>Strict data security and NDAs on every client engagement.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <h4>Deadline-Driven</h4>
+                                <p>We meet every filing and reporting deadline — no exceptions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="services section bg-light-alt">
+            <div class="container">
+                <div class="section-header text-center reveal-up">
+                    <div class="section-eyebrow">What We Offer</div>
+                    <h2 class="section-title">Core Services</h2>
+                    <p class="section-subtitle">Comprehensive financial solutions tailored to U.S. standards, delivered with precision and care.</p>
+                </div>
+                <div class="services-grid mt-5">
+                    <div class="service-card reveal-up">
+                        <div class="service-card-top">
+                            <div class="service-icon-wrap"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <span class="service-tag">Core</span>
+                        </div>
+                        <h3>Financial Accounting & Reporting</h3>
+                        <p>Accurate financial reporting and bookkeeping under U.S. GAAP — ensuring transparency, compliance, and insight-driven decisions.</p>
+                        <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card reveal-up" style="transition-delay:0.1s">
+                        <div class="service-card-top">
+                            <div class="service-icon-wrap"><i class="fas fa-balance-scale"></i></div>
+                            <span class="service-tag">Popular</span>
+                        </div>
+                        <h3>Tax Preparation & Planning</h3>
+                        <p>Comprehensive U.S. tax preparation, filing, and proactive planning aligned with federal and international tax laws.</p>
+                        <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card reveal-up" style="transition-delay:0.15s">
+                        <div class="service-card-top">
+                            <div class="service-icon-wrap"><i class="fas fa-magnifying-glass-dollar"></i></div>
+                            <span class="service-tag">Compliance</span>
+                        </div>
+                        <h3>Audit Support & Compliance</h3>
+                        <p>Rigorous audit preparation, financial analysis, and regulatory compliance to keep your business fully protected.</p>
+                        <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card reveal-up" style="transition-delay:0.2s">
+                        <div class="service-card-top">
+                            <div class="service-icon-wrap"><i class="fas fa-calculator"></i></div>
+                            <span class="service-tag">Essential</span>
+                        </div>
+                        <h3>Bookkeeping & Payroll</h3>
+                        <p>Meticulous day-to-day bookkeeping and full-cycle payroll management so you can focus on growing your business.</p>
+                        <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card reveal-up" style="transition-delay:0.25s">
+                        <div class="service-card-top">
+                            <div class="service-icon-wrap"><i class="fas fa-briefcase"></i></div>
+                            <span class="service-tag">Advisory</span>
+                        </div>
+                        <h3>Virtual CFO & Advisory</h3>
+                        <p>Strategic financial leadership on demand — budgeting, forecasting, fundraising support, and long-term growth advisory.</p>
+                        <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROCESS -->
+        <section id="process" class="process section">
+            <div class="container">
+                <div class="section-header text-center reveal-up">
+                    <div class="section-eyebrow">How It Works</div>
+                    <h2 class="section-title">Our Proven 3-Step Process</h2>
+                    <p class="section-subtitle">Simple, transparent, and results-driven — from first call to final deliverable.</p>
+                </div>
+                <div class="process-steps mt-5">
+                    <div class="process-step reveal-up">
+                        <div class="process-step-number">01</div>
+                        <div class="process-step-icon"><i class="fas fa-comments"></i></div>
+                        <h3>Free Consultation</h3>
+                        <p>We begin with a no-obligation discovery call to understand your specific needs, timelines, and goals.</p>
+                    </div>
+                    <div class="process-connector"><i class="fas fa-chevron-right"></i></div>
+                    <div class="process-step reveal-up" style="transition-delay:0.15s">
+                        <div class="process-step-number">02</div>
+                        <div class="process-step-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                        <h3>Deep Analysis</h3>
+                        <p>Our CPA team reviews your financial landscape and designs a tailored compliance and growth strategy.</p>
+                    </div>
+                    <div class="process-connector"><i class="fas fa-chevron-right"></i></div>
+                    <div class="process-step reveal-up" style="transition-delay:0.3s">
+                        <div class="process-step-number">03</div>
+                        <div class="process-step-icon"><i class="fas fa-paper-plane"></i></div>
+                        <h3>Precise Delivery</h3>
+                        <p>We deliver accurate, deadline-driven financials and filings — with full transparency every step of the way.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- CTA BANNER -->
+        <section class="cta-banner">
+            <div class="cta-banner-bg"></div>
+            <div class="container text-center reveal-up">
+                <div class="section-eyebrow eyebrow-light">Ready to Get Started?</div>
+                <h2 class="cta-title">"Your Financial Success, Calculated."</h2>
+                <p class="cta-subtitle">Partner with a dedicated team of U.S.-licensed CPAs committed to your precision, compliance, and growth.</p>
+                <a href="#contact" class="btn btn-gold btn-lg">Start Optimizing Today <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="contact section">
+            <div class="container contact-grid">
+                <div class="contact-info reveal-left">
+                    <div class="section-eyebrow">Get In Touch</div>
+                    <h2 class="section-title">Let's Talk Financials</h2>
+                    <p class="section-body">Contact us for a tailored proposal and discover how we streamline your accounting and tax processes.</p>
+                    <div class="contact-items mt-4">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="contact-detail">
+                                <span class="contact-label">Phone (India)</span>
                                 <a href="tel:+918123485942">+91-81234 85942</a>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <a
-                                    href="mailto:knowledgeexcellencecpa@outlook.com">knowledgeexcellencecpa@outlook.com</a><br>
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-detail">
+                                <span class="contact-label">Email</span>
+                                <a href="mailto:knowledgeexcellencecpa@outlook.com">knowledgeexcellencecpa@outlook.com</a>
                                 <a href="mailto:Kecpa25@gmail.com">Kecpa25@gmail.com</a>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Location</h4>
-                                <p>Bengaluru India - 560067</p>
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-detail">
+                                <span class="contact-label">Office</span>
+                                <span>Bengaluru, India — 560067</span>
                             </div>
                         </div>
                     </div>
+                    <div class="contact-trust-row">
+                        <span><i class="fas fa-lock"></i> Secure & Confidential</span>
+                        <span><i class="fas fa-clock"></i> 24hr Response</span>
+                        <span><i class="fas fa-thumbs-up"></i> No Obligation</span>
+                    </div>
                 </div>
-                <div class="contact-form-container fade-in-right">
+                <div class="contact-form-container reveal-right">
+                    <div class="form-header">
+                        <h3>Send Us a Message</h3>
+                        <p>We respond within 24 hours, guaranteed.</p>
+                    </div>
                     <form class="contact-form" id="contactForm" action="https://formspree.io/f/xykdrpbe" method="POST">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Your Phone No</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+1..." required>
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@company.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            <label for="service">Service Interested In</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service...</option>
+                                <option>Financial Accounting & Reporting</option>
+                                <option>Tax Preparation & Planning</option>
+                                <option>Audit Support & Compliance</option>
+                                <option>Bookkeeping & Payroll</option>
+                                <option>Virtual CFO & Advisory</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="message">Message (optional)</label>
-                            <textarea id="message" name="message" rows="4"
-                                placeholder="How can we help you?"></textarea>
+                            <textarea id="message" name="message" rows="4" placeholder="How can we help you?"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Send Message</button>
+                        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
                         <div id="formStatus" class="form-status" aria-live="polite"></div>
                     </form>
                 </div>
@@ -189,28 +339,66 @@
         </section>
     </main>
 
+    <!-- FOOTER -->
     <footer class="footer">
-        <div class="container text-center">
-            <a href="#home" class="logo mb-2" style="justify-content: center;">
-                <img src="logo.png" alt="Knowledge Excellence CPA's Logo" class="logo-img logo-img-footer">
-                <span class="logo-name"><span class="logo-text">Knowledge Excellence</span><span class="logo-accent"> CPA's</span></span>
-            </a>
-            <p>&copy; 2026 Knowledge Excellence CPAs. All rights reserved.</p>
-            <div class="footer-love">
-                Made with <span class="heart">❤️</span> by <span class="name">Vatsal Garg</span>
+        <div class="footer-top">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <a href="#home" class="logo footer-logo">
+                        <img src="logo.png" alt="Knowledge Excellence CPAs Logo" class="logo-img">
+                        <span class="logo-name">
+                            <span class="logo-text">Knowledge Excellence</span>
+                            <span class="logo-accent">CPA's</span>
+                        </span>
+                    </a>
+                    <p class="footer-tagline">Bridging global expertise &amp; empowering financial growth — with integrity, precision, and care.</p>
+                    <div class="visitor-counter">
+                        <i class="fas fa-eye"></i>
+                        <span>Total Visitors: </span>
+                        <span id="visitorCount" class="visitor-number">—</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Financial Accounting</a></li>
+                        <li><a href="#services">Tax Preparation</a></li>
+                        <li><a href="#services">Audit Support</a></li>
+                        <li><a href="#services">Bookkeeping & Payroll</a></li>
+                        <li><a href="#services">Virtual CFO</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#process">Our Process</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Contact</h4>
+                    <ul class="footer-contact-list">
+                        <li><i class="fas fa-phone"></i> <a href="tel:+918123485942">+91-81234 85942</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:Kecpa25@gmail.com">Kecpa25@gmail.com</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bengaluru, India 560067</li>
+                    </ul>
+                </div>
             </div>
-            <div class="visitor-counter">
-                <i class="fas fa-eye"></i>
-                <span>Total Visitors: </span>
-                <span id="visitorCount" class="visitor-number">—</span>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; 2026 Knowledge Excellence CPAs. All rights reserved.</p>
+                <div class="footer-love">
+                    Made with <span class="heart">❤️</span> by <span class="name">Vatsal Garg</span>
+                </div>
+                <a href="#home" class="scroll-top" id="scrollTop" aria-label="Back to top">
+                    <i class="fas fa-chevron-up"></i>
+                </a>
             </div>
-            <hr class="footer-divider">
-            <p class="footer-copy">Bridging global expertise &amp; empowering financial growth.</p>
-            <a href="#home" class="scroll-top"><i class="fas fa-chevron-up"></i></a>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
-
 </html>
