@@ -1,10 +1,7 @@
-/*
-  Cloudflare Pages / Workers _headers file
-  Applies security headers to every response at the edge.
-  Ref: https://developers.cloudflare.com/pages/configuration/headers/
-*/
+# Security headers — applied by Cloudflare Workers at the edge
+# Ref: https://developers.cloudflare.com/workers/static-assets/headers/
 
-https://knowledgeexcellencecpa.com/*
+/*
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
