@@ -135,32 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
   }
 
-  // 4. STATS COUNTER ANIMATION
-  const statNumbers = document.querySelectorAll('.stat-number[data-target]');
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCount(entry.target);
-        statsObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  statNumbers.forEach(el => statsObserver.observe(el));
 
-  function animateCount(el) {
-    const target = parseInt(el.dataset.target, 10);
-    const duration = 1600;
-    const start = performance.now();
-    const tick = (now) => {
-      const p = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.floor(eased * target).toLocaleString();
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
+  // 4. GLOBAL VISITOR COUNTER
 
-  // 5. GLOBAL VISITOR COUNTER (counterapi.dev — shared count for ALL visitors)
   const visitorCountEl = document.getElementById('visitorCount');
   if (visitorCountEl) {
     // Show cached value immediately (so it doesn't flicker on load)

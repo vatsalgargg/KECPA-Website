@@ -1,14 +1,9 @@
 /*
-  Netlify _headers file
-  Applied to every response served by Netlify hosting.
-  Enforces HTTPS, prevents clickjacking, XSS, MIME sniffing,
-  and restricts what external resources the browser can load.
+  Cloudflare Pages / Workers _headers file
+  Applies security headers to every response at the edge.
+  Ref: https://developers.cloudflare.com/pages/configuration/headers/
 */
 
-/*
-  Force HTTPS on all requests (HSTS)
-  max-age=1 year, include subdomains, eligible for HSTS preload list
-*/
 https://knowledgeexcellencecpa.com/*
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Frame-Options: DENY
