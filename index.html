@@ -301,37 +301,62 @@
                         <h3>Send Us a Message</h3>
                         <p>We respond within 24 hours, guaranteed.</p>
                     </div>
-                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xykdrpbe" method="POST">
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xykdrpbe" method="POST" novalidate>
                         <!-- Honeypot: hidden from real users, bots fill this — submission is rejected -->
                         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Full Name</label>
-                                <input type="text" id="name" name="name" placeholder="John Doe" required>
+                                <input
+                                    type="text" id="name" name="name"
+                                    placeholder="John Doe"
+                                    required
+                                    minlength="2" maxlength="80"
+                                    pattern="[A-Za-z\s'\-]{2,80}"
+                                    autocomplete="name"
+                                    title="Name must be 2–80 characters. Letters, spaces, hyphens and apostrophes only.">
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required>
+                                <input
+                                    type="tel" id="phone" name="phone"
+                                    placeholder="+1 (555) 000-0000"
+                                    required
+                                    minlength="7" maxlength="20"
+                                    pattern="[\+]?[0-9\s\-\(\)]{7,20}"
+                                    autocomplete="tel"
+                                    title="Enter a valid phone number (7–20 digits, spaces, hyphens, parentheses allowed).">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="john@company.com" required>
+                            <input
+                                type="email" id="email" name="email"
+                                placeholder="john@company.com"
+                                required
+                                maxlength="254"
+                                autocomplete="email"
+                                title="Enter a valid email address.">
                         </div>
                         <div class="form-group">
                             <label for="service">Service Interested In</label>
-                            <select id="service" name="service">
+                            <select id="service" name="service" autocomplete="off">
                                 <option value="">Select a service...</option>
-                                <option>Financial Accounting & Reporting</option>
-                                <option>Tax Preparation & Planning</option>
-                                <option>Audit Support & Compliance</option>
-                                <option>Bookkeeping & Payroll</option>
-                                <option>Virtual CFO & Advisory</option>
+                                <option value="Financial Accounting &amp; Reporting">Financial Accounting &amp; Reporting</option>
+                                <option value="Tax Preparation &amp; Planning">Tax Preparation &amp; Planning</option>
+                                <option value="Audit Support &amp; Compliance">Audit Support &amp; Compliance</option>
+                                <option value="Bookkeeping &amp; Payroll">Bookkeeping &amp; Payroll</option>
+                                <option value="Virtual CFO &amp; Advisory">Virtual CFO &amp; Advisory</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="message">Message (optional)</label>
-                            <textarea id="message" name="message" rows="4" placeholder="How can we help you?"></textarea>
+                            <label for="message">Message <span class="field-optional">(optional)</span></label>
+                            <textarea
+                                id="message" name="message"
+                                rows="4"
+                                maxlength="2000"
+                                placeholder="How can we help you? (max 2000 characters)"></textarea>
+                            <span class="char-counter" id="msgCounter">0 / 2000</span>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
                             <i class="fas fa-paper-plane"></i> Send Message
