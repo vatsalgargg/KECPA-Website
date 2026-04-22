@@ -1,6 +1,7 @@
 name = 'kecpa'
 compatibility_date = "2026-04-22"
 
-# Cloudflare Pages — pure static site, no build step needed.
-# Security headers are handled by the _headers file at the root.
-pages_build_output_dir = "./"
+# Serve static files via Cloudflare Workers Assets
+# No worker script needed — assets are served directly at the edge.
+[assets]
+directory = "./"
