@@ -1,0 +1,38 @@
+name: Validate Static Site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: |
+          files=("index.html" "index.css" "script.js" "sitemap.xml" "robots.txt")
+          for f in "${files[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "MISSING: $f"
+              exit 1
+            fi
+            echo "OK: $f"
+          done
+
+      - name: Check JS syntax
+        run: node --check script.js && echo "JS syntax OK"
+
+      - name: Check HTML is not empty
+        run: |
+          size=$(wc -c < index.html)
+          if [ "$size" -lt 1000 ]; then
+            echo "index.html looks too small: $size bytes"
+            exit 1
+          fi
+          echo "index.html size OK: $size bytes"
