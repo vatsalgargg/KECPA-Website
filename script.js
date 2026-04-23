@@ -136,46 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // 4. GLOBAL VISITOR COUNTER
-
-  const visitorCountEl = document.getElementById('visitorCount');
-  if (visitorCountEl) {
-    // Show cached value immediately (so it doesn't flicker on load)
-    const cached = localStorage.getItem('kecpa_vc_cache');
-    if (cached) visitorCountEl.textContent = parseInt(cached, 10).toLocaleString();
-
-    // Hit the global counter — every visitor increments the SAME shared count
-    fetch('https://api.counterapi.dev/v1/kecpa-website/visits/hit')
-      .then(res => { if (!res.ok) throw new Error(); return res.json(); })
-      .then(data => {
-        if (data && data.count !== undefined) {
-          const count = data.count;
-          localStorage.setItem('kecpa_vc_cache', count); // cache for instant display next visit
-          animateVisitor(count);
-        }
-      })
-      .catch(() => {
-        // API failed — show cached value only, do NOT increment locally
-        if (cached) {
-          visitorCountEl.textContent = parseInt(cached, 10).toLocaleString();
-        } else {
-          visitorCountEl.textContent = '—';
-        }
-      });
-
-    function animateVisitor(target) {
-      const start = parseInt(cached || Math.max(0, target - 60), 10);
-      const duration = 1200;
-      const t0 = performance.now();
-      const tick = (now) => {
-        const p = Math.min((now - t0) / duration, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        visitorCountEl.textContent = Math.floor(start + (target - start) * eased).toLocaleString();
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    }
-  }
 
   // 6. SCROLL TO TOP
   document.getElementById('scrollTop')?.addEventListener('click', (e) => {
