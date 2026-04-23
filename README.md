@@ -7,7 +7,6 @@ Static website for **[knowledgeexcellencecpa.com](https://knowledgeexcellencecpa
 - Plain HTML, CSS, JavaScript — no framework
 - Hosted on **Cloudflare Pages** via `wrangler.toml`
 - Form submissions via **Formspree**
-- Visitor counter via **CounterAPI**
 
 ## Files
 
