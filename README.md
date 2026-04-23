@@ -1,1 +1,27 @@
-# KECPA-Website
+# Knowledge Excellence CPAs — Website
+
+Static website for **[knowledgeexcellencecpa.com](https://knowledgeexcellencecpa.com)** — a U.S.-licensed CPA firm offering accounting, tax, audit, bookkeeping, payroll, and virtual CFO services.
+
+## Stack
+
+- Plain HTML, CSS, JavaScript — no framework
+- Hosted on **Cloudflare Pages** via `wrangler.toml`
+- Form submissions via **Formspree**
+- Visitor counter via **CounterAPI**
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `index.html` | Main page |
+| `index.css` | Styles |
+| `script.js` | Interactivity & form handling |
+| `logo.png` | Brand logo |
+| `sitemap.xml` | SEO sitemap |
+| `robots.txt` | Search engine directives |
+| `_headers` | Cloudflare security headers (CSP, HSTS, etc.) |
+| `wrangler.toml` | Cloudflare Pages deployment config |
+
+## Deploy
+
+Cloudflare Pages auto-deploys on every push to `main`.
