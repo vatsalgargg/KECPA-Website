@@ -178,6 +178,8 @@ img{max-width:100%;height:auto;display:block;}
 .form-header{margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);}
 .form-header h3{font-family:var(--font-sans);font-size:1.2rem;font-weight:700;color:var(--navy);}
 .form-header p{font-size:0.85rem;color:var(--text-muted);margin-top:0.2rem;}
+/* Honeypot anti-spam field — must always stay hidden */
+.honeypot{display:none !important;visibility:hidden !important;position:absolute !important;left:-9999px !important;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
 .form-group{margin-bottom:1.25rem;}
 .form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--text-dark);margin-bottom:0.4rem;}
