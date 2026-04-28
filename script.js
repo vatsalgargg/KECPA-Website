@@ -136,6 +136,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  // VISITOR BADGE — src set via JS to avoid HTML & encoding issues; extraCount seeds from 1000
+  const badge = document.getElementById('visitorBadge');
+  if (badge) {
+    badge.src = 'https://hits.sh/knowledgeexcellencecpa.com.svg?style=flat&label=Visitors&color=b8860b&labelColor=0a1628&extraCount=1000';
+  }
+
   // 6. SCROLL TO TOP
   document.getElementById('scrollTop')?.addEventListener('click', (e) => {
     e.preventDefault();
