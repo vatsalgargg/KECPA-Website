@@ -1,0 +1,8 @@
+/index.html / 301
+/favicon.ico /logo.png 301
+/home /#home 301
+/about /#about 301
+/services /#services 301
+/process /#process 301
+/contact /#contact 301
+https://www.knowledgeexcellencecpa.com/* https://knowledgeexcellencecpa.com/:splat 301!
