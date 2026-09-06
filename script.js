@@ -1,4 +1,8 @@
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('pageshow', () => window.scrollTo(0, 0));
+
 document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -111,11 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
   menuToggle.addEventListener('click', () => {
     const isOpen = navLinks.classList.toggle('open');
     menuToggle.classList.toggle('open', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
   });
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('open');
       menuToggle.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
     });
   });
 
