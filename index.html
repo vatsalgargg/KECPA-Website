@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0a1628">
+    <meta name="theme-color" content="#f5f2eb">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
@@ -78,7 +78,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <!-- Fonts: only weights actually used -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet">
     <!-- Font Awesome: synchronous — icons are critical UI elements -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -92,6 +92,8 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="reading-progress" aria-hidden="true"></div>
 
     <!-- NAVBAR -->
     <header class="navbar" id="navbar">
@@ -104,7 +106,7 @@
                     <span class="logo-accent">CPA's</span>
                 </span>
             </a>
-            <nav class="nav-links" id="navLinks">
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#process" class="nav-link">Process</a>
@@ -118,20 +120,18 @@
         </div>
     </header>
 
-    <div id="tiles-background" class="tiles-background" aria-hidden="true"></div>
-
-    <main>
+    <main id="main-content">
         <!-- HERO -->
         <section id="home" class="hero">
-            <div class="hero-bg-mesh"></div>
             <div class="container hero-grid">
-                <div class="hero-left reveal-left">
+                <div class="hero-left">
+                    <div class="hero-kicker"><span></span> Accounting. Tax. Advisory.</div>
                     <div class="hero-badge">
                         <i class="fas fa-shield-halved"></i>
                         US Dual Licensed CPAs (Montana & Washington State Board)
                     </div>
                     <h1 class="hero-title">
-                        Your Growth. Our Expertise.<br class="hero-br"> <span class="title-gold">Built on Precision.</span>
+                        <span class="title-line">Your Growth.</span> <span class="title-line">Our Expertise.</span> <span class="title-gold">Built on Precision.</span>
                     </h1>
                     <p class="hero-subtitle">Your Books Are Clean. Your Taxes Are Optimized. Your Strategy Is
                         Bulletproof.
@@ -149,19 +149,28 @@
                         <span class="trust-badge"><i class="fas fa-globe"></i> IFRS Compliant</span>
                     </div>
                 </div>
-                <div class="hero-right reveal-right">
-                    <div class="hero-card-stack">
-                        <div class="hero-img-blob">
-                            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=60"
-                                alt="Professional CPA team at work" loading="lazy" decoding="async" width="340"
-                                height="420">
+                <div class="hero-right">
+                    <div class="sculpture-label"><span>THE ARCHITECTURE OF GROWTH</span><span>KE / 01</span></div>
+                    <div class="finance-scene" aria-hidden="true">
+                        <div class="scene-rings"><span></span><span></span><span></span></div>
+                        <div class="scene-shadow"></div>
+                        <div class="finance-world">
+                            <div class="chart-platform"><span>PRECISION IS THE FOUNDATION.</span></div>
+                            <div class="growth-column column-1"><span class="face front"></span><span class="face side"></span><span class="face top"></span></div>
+                            <div class="growth-column column-2"><span class="face front"></span><span class="face side"></span><span class="face top"></span></div>
+                            <div class="growth-column column-3"><span class="face front"></span><span class="face side"></span><span class="face top"></span></div>
+                            <div class="growth-column column-4"><span class="face front"></span><span class="face side"></span><span class="face top"></span></div>
+                            <div class="growth-column column-5"><span class="face front"></span><span class="face side"></span><span class="face top"></span></div>
+                            <div class="growth-orbit"></div>
+                            <div class="precision-coin"><span>KE</span></div>
                         </div>
                     </div>
+                    <div class="sculpture-caption"><span>Clarity.</span><span>Confidence.</span><span>Growth. <i class="fas fa-arrow-trend-up"></i></span></div>
                 </div>
             </div>
             <div class="hero-scroll-indicator">
-                <span>Scroll to explore</span>
-                <div class="scroll-dot"></div>
+                <a href="#about"><span class="scroll-arrow">↓</span> Scroll to explore</a>
+                <span>U.S. EXPERTISE. GLOBAL PERSPECTIVE.</span>
             </div>
         </section>
 
@@ -199,6 +208,11 @@
                     <a href="#contact" class="btn btn-primary mt-3">Work With Us <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="about-right reveal-right">
+                    <div class="global-map" aria-hidden="true">
+                        <div class="globe-line globe-line-1"></div><div class="globe-line globe-line-2"></div><div class="globe-line globe-line-3"></div>
+                        <span class="map-point point-us">UNITED STATES</span><span class="map-point point-in">BENGALURU, INDIA</span>
+                        <span class="map-center">Global reach.<br><em>Personal commitment.</em></span>
+                    </div>
                     <div class="about-features">
                         <div class="about-feature">
                             <div class="about-feature-icon"><i class="fas fa-user-tie"></i></div>
@@ -235,7 +249,7 @@
 
         <!-- SERVICES -->
         <section id="services" class="services section bg-light-alt">
-            <div class="container">
+            <div class="container services-layout">
                 <div class="section-header text-center reveal-up">
                     <div class="section-eyebrow">What We Offer</div>
                     <h2 class="section-title">Core Services</h2>
@@ -339,7 +353,7 @@
 
         <!-- CTA BANNER -->
         <section class="cta-banner">
-            <div class="cta-banner-bg"></div>
+            <div class="cta-orbits" aria-hidden="true"><span></span><span></span><span></span></div>
             <div class="container text-center reveal-up">
                 <div class="section-eyebrow eyebrow-light">Ready to Get Started?</div>
                 <h2 class="cta-title">"Your Financial Success, Calculated."</h2>
@@ -449,6 +463,7 @@
 
     <!-- FOOTER -->
     <footer class="footer">
+        <div class="container footer-wordmark" aria-hidden="true">KECPA<span>↗</span></div>
         <div class="footer-top">
             <div class="container footer-grid">
                 <div class="footer-brand">
@@ -511,7 +526,7 @@
         </div>
     </footer>
 
-    <script src="script.js" defer></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>

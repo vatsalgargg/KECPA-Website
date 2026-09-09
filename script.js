@@ -1,10 +1,8 @@
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-window.addEventListener('pageshow', () => window.scrollTo(0, 0));
+window.addEventListener('pageshow', () => window.scrollTo({ top: 0, behavior: 'instant' }));
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.scrollTo(0, 0);
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: 'instant' });
 
   // ── Security Logger ──────────────────────────────────────────────────────
   // Structured client-side logging for anomalies, API errors, and spam attempts.
@@ -25,12 +23,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Prevents repeated submissions within 60 seconds.
   const RATE_LIMIT_MS = 60_000;
   const RL_KEY = 'kecpa_form_last_submit';
+  let lastSubmission = 0;
+  function getLastSubmission() {
+    try { return parseInt(localStorage.getItem(RL_KEY) || '0', 10) || lastSubmission; }
+    catch { return lastSubmission; }
+  }
   function isRateLimited() {
-    const last = parseInt(localStorage.getItem(RL_KEY) || '0', 10);
-    return Date.now() - last < RATE_LIMIT_MS;
+    return Date.now() - getLastSubmission() < RATE_LIMIT_MS;
   }
   function markSubmission() {
-    localStorage.setItem(RL_KEY, Date.now());
+    lastSubmission = Date.now();
+    try { localStorage.setItem(RL_KEY, String(lastSubmission)); }
+    catch { /* Private browsers can block storage; retain this session's cooldown. */ }
   }
 
   // ── Input Sanitizer ───────────────────────────────────────────────────────
@@ -101,45 +105,128 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     el.textContent = msg || '';
     el.style.display = msg ? 'block' : 'none';
+    const field = document.getElementById(id);
+    field?.setAttribute('aria-invalid', String(Boolean(msg)));
+    field?.setAttribute('aria-describedby', el.id);
   }
 
   // 1. NAVBAR SCROLL
   const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
 
   // 2. MOBILE MENU
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
-  menuToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
+  function setMenu(isOpen) {
+    navLinks.classList.toggle('open', isOpen);
     menuToggle.classList.toggle('open', isOpen);
     menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+  }
+  menuToggle.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+      setMenu(false);
+      menuToggle.focus();
+    }
   });
+  document.addEventListener('click', event => {
+    if (!navbar.contains(event.target)) setMenu(false);
+  });
+  navbar.addEventListener('focusout', event => {
+    if (!navbar.contains(event.relatedTarget)) setMenu(false);
+  });
+  window.matchMedia('(min-width: 761px)').addEventListener('change', () => setMenu(false));
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      menuToggle.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
+      setMenu(false);
     });
   });
 
   // 3. SCROLL REVEAL
-  if (prefersReducedMotion) {
-    // Skip animations — make everything visible immediately
-    document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => el.classList.add('visible'));
-  } else {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+  // Finite, scroll-linked 3D motion. No scroll hijacking or perpetual render loop.
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const world = document.querySelector('.finance-world');
+  const hero = document.querySelector('.hero');
+  const columns = [...document.querySelectorAll('.growth-column')];
+  const cards = [...document.querySelectorAll('.service-card')];
+  const processSteps = [...document.querySelectorAll('.process-step')];
+  const process = document.getElementById('process');
+  const processRail = document.querySelector('.process-steps');
+  const globe = document.querySelector('.globe-line-2');
+  const globalMap = document.querySelector('.global-map');
+  const cta = document.querySelector('.cta-banner');
+  const ctaOrbits = [...document.querySelectorAll('.cta-orbits span')];
+  const progress = document.querySelector('.reading-progress');
+  const navAnchors = [...navLinks.querySelectorAll('.nav-link')];
+  const sections = [...document.querySelectorAll('main > section[id]')];
+  const clamp = value => Math.min(1, Math.max(0, value));
+  let pointerX = 0, pointerY = 0, frame = 0;
+  function renderMotion() {
+    frame = 0;
+    const height = window.innerHeight;
+    const reduced = motionPreference.matches;
+    const desktop = window.innerWidth > 760;
+    const heroRect = hero.getBoundingClientRect();
+    const processRect = process.getBoundingClientRect();
+    const mapRect = globalMap.getBoundingClientRect();
+    const ctaRect = cta.getBoundingClientRect();
+    const cardRects = cards.map(card => card.getBoundingClientRect());
+    const sectionRects = sections.map(section => section.getBoundingClientRect());
+    const scrollRange = document.documentElement.scrollHeight - height;
+    progress.style.transform = `scaleX(${clamp(window.scrollY / Math.max(1, scrollRange))})`;
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+    const current = sections.filter((section, i) => sectionRects[i].top < height * .4).at(-1)?.id || 'home';
+    navAnchors.forEach(link => {
+      if (link.hash === `#${current}`) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (reduced) {
+      world.style.transform = '';
+      [...cards, ...columns, ...processSteps, ...ctaOrbits, globe].forEach(el => el.style.transform = '');
+      processRail.style.setProperty('--process-progress', '1');
+      return;
+    }
+    if (heroRect.bottom > 0) {
+      const p = clamp(-heroRect.top / heroRect.height);
+      world.style.transform = `rotateX(${-19 + p * 16 + pointerY * 4}deg) rotateY(${-31 + p * 42 + pointerX * 9}deg) translateY(${-p * 30}px)`;
+      columns.forEach((column, i) => column.style.transform = `translateY(${-p * i * 14}px)`);
+    }
+    cards.forEach((card, i) => {
+      const rect = cardRects[i];
+      if (!desktop) { card.style.transform = ''; return; }
+      if (rect.bottom < 0 || rect.top > height) return;
+      const enter = clamp((rect.top - height * .5) / (height * .6));
+      card.style.transform = desktop && !card.matches(':focus-within, :hover') ? `rotateX(${enter * 12}deg) translateY(${enter * 18}px)` : '';
+    });
+    const processProgress = clamp((height - processRect.top) / (height * .85));
+    processRail.style.setProperty('--process-progress', String(processProgress));
+    processSteps.forEach((step, i) => {
+      if (!desktop) { step.style.transform = ''; return; }
+      if (processRect.bottom < 0 || processRect.top > height) return;
+      const p = clamp((processProgress - i * .12) / .64);
+      step.style.transform = desktop ? `rotateX(${(1 - p) * 16}deg) translateY(${(1 - p) * 28}px)` : '';
+    });
+    if (mapRect.top < height && mapRect.bottom > 0) globe.style.transform = `rotate(${-18 + clamp((height - mapRect.top) / height) * 45}deg) scaleX(.5)`;
+    if (ctaRect.top < height && ctaRect.bottom > 0) {
+      const p = clamp((height - ctaRect.top) / (height + ctaRect.height));
+      ctaOrbits.forEach((ring, i) => ring.style.transform = `rotateX(${52 + p * 20}deg) rotateZ(${-35 + p * 45 + i * 5}deg)`);
+    }
   }
+  function scheduleMotion() { if (!frame) frame = requestAnimationFrame(renderMotion); }
+  window.addEventListener('scroll', scheduleMotion, { passive: true });
+  window.addEventListener('resize', scheduleMotion, { passive: true });
+  motionPreference.addEventListener('change', scheduleMotion);
+  hero.addEventListener('pointermove', event => {
+    if (!finePointer.matches || motionPreference.matches) return;
+    const rect = hero.getBoundingClientRect();
+    pointerX = (event.clientX - rect.left) / rect.width - .5;
+    pointerY = (event.clientY - rect.top) / rect.height - .5;
+    scheduleMotion();
+  }, { passive: true });
+  hero.addEventListener('pointerleave', () => { pointerX = pointerY = 0; scheduleMotion(); });
+  document.fonts.ready.then(scheduleMotion);
+  scheduleMotion();
 
 
   // VISITOR BADGE — src set via JS to avoid HTML & encoding issues; extraCount seeds from 1000
@@ -151,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. SCROLL TO TOP
   document.getElementById('scrollTop')?.addEventListener('click', (e) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: motionPreference.matches ? 'instant' : 'smooth' });
   });
 
   // 7. CONTACT FORM — with sanitization, validation, rate limiting, honeypot
@@ -183,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 2. Rate limit check
       if (isRateLimited()) {
-        const remaining = Math.ceil((RATE_LIMIT_MS - (Date.now() - parseInt(localStorage.getItem(RL_KEY) || '0', 10))) / 1000);
+        const remaining = Math.ceil((RATE_LIMIT_MS - (Date.now() - getLastSubmission())) / 1000);
         secLog.warn('RATE_LIMIT_HIT', { cooldown_s: remaining });
         formStatus.className = 'form-status error';
         formStatus.textContent = `⚠️ Please wait ${remaining}s before sending another message.`;
@@ -209,6 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
         secLog.warn('VALIDATION_FAILED', { fields: Object.keys(fields) });
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        contactForm.querySelector('[aria-invalid="true"]')?.focus();
         return;
       }
 
@@ -233,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
           formStatus.className = 'form-status success';
           formStatus.textContent = '✅ Thank you! We\'ll be in touch within 24 hours.';
           contactForm.reset();
+          if (msgCounter) msgCounter.textContent = '0 / 2000';
         } else {
           const data = await res.json().catch(() => ({}));
           const msg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Submission failed.';

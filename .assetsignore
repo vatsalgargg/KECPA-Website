@@ -1,0 +1,12 @@
+node_modules
+.git
+.github
+.vibecode-security
+.qa-output
+scripts
+dist
+PRD.md
+ARCHITECTURE.md
+DESIGN.md
+RULES.md
+PHASES.md
