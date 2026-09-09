@@ -8,8 +8,9 @@
 ## Foundations
 - Ivory #f5f2eb, sand #eae5db, midnight teal/navy #102a34, ink #13272d, copper #b5542e. Warm copper highlights connect all illustrations.
 - Playfair Display regular and italic for editorial headings; Inter 400/500/600 for reading and controls. No synthetic bold headings.
-- Desktop margins 56px, tablet 32px, mobile 20px/16px. Content capped at 1328px. Sections use 120px, 90px and 70px vertical spacing.
-- Breakpoints at 1441, 1100, 900, 760 and 390px. Single-column mobile, opaque mobile menu, two-column desktop.
+- Containers use min(100%, 90rem), with clamp() gutters and section spacing. Typography scales smoothly with bounded clamp() values.
+- Content grids use repeat(auto-fit, minmax(min(100%, minimum), 1fr)). Their content minimum determines column count, with no viewport-specific column overrides.
+- The sculpture scales through container-relative font sizing and em geometry. Navigation retains its 760px behavior switch and compact landscape mode; reduced-motion remains explicit.
 - Motion: finite column assembly; pointer-responsive sculpture; scroll-driven rotation and column separation; gently folding service panels; process rail and panels; orbit-line rotation in closing statement.
 - No text hidden awaiting an observer. No infinite ambient animation. Small screens omit service/process tilting; reduced-motion removes all movement.
 

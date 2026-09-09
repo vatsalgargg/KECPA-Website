@@ -189,8 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (heroRect.bottom > 0) {
       const p = clamp(-heroRect.top / heroRect.height);
-      world.style.transform = `rotateX(${-19 + p * 16 + pointerY * 4}deg) rotateY(${-31 + p * 42 + pointerX * 9}deg) translateY(${-p * 30}px)`;
-      columns.forEach((column, i) => column.style.transform = `translateY(${-p * i * 14}px)`);
+      world.style.transform = `rotateX(${-19 + p * 16 + pointerY * 4}deg) rotateY(${-31 + p * 42 + pointerX * 9}deg) translateY(${-p * 1.875}em)`;
+      columns.forEach((column, i) => column.style.transform = `translateY(${-p * i * .875}em)`);
     }
     cards.forEach((card, i) => {
       const rect = cardRects[i];
