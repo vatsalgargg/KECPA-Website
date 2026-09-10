@@ -1109,8 +1109,11 @@ a,button {
   justify-content: space-between;
   align-items: center;
 }
-.footer-wordmark span {
-  font: 200 .7em var(--font-sans);
+.footer-arrow {
+  display: block;
+  width: .55em;
+  height: .55em;
+  flex-shrink: 0;
   color: #d8a783;
 }
 .footer-top {
