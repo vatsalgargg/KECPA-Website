@@ -25,7 +25,9 @@ html {
 body {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image: linear-gradient(#13272d0d 1px,transparent 1px),linear-gradient(90deg,#13272d0d 1px,transparent 1px);
+  background-size: clamp(2.5rem,5vw,4.5rem) clamp(2.5rem,5vw,4.5rem);
   color: var(--ink);
   font: 400 15px/1.7 var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -265,7 +267,10 @@ a,button {
 .hero {
   position: relative;
   overflow: clip;
-  background: radial-gradient(ellipse at 75% 42%,#ece5d4 0,transparent 47%),var(--paper);
+  background-color: var(--paper);
+  background-image: linear-gradient(#13272d0d 1px,transparent 1px),linear-gradient(90deg,#13272d0d 1px,transparent 1px),radial-gradient(ellipse at 75% 42%,#ece5d4 0,transparent 47%);
+  background-size: clamp(2.5rem,5vw,4.5rem) clamp(2.5rem,5vw,4.5rem),clamp(2.5rem,5vw,4.5rem) clamp(2.5rem,5vw,4.5rem),auto;
+  background-repeat: repeat,repeat,no-repeat;
 }
 .hero-grid {
   display: grid;
@@ -711,7 +716,9 @@ a,button {
 }
 /* Services flow past a pinned editorial heading. */
 .services {
-  background: var(--paper-deep);
+  background-color: var(--paper-deep);
+  background-image: linear-gradient(#13272d0a 1px,transparent 1px),linear-gradient(90deg,#13272d0a 1px,transparent 1px);
+  background-size: clamp(2.5rem,5vw,4.5rem) clamp(2.5rem,5vw,4.5rem);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
